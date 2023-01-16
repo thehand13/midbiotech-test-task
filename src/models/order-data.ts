@@ -1,10 +1,8 @@
-export interface orderData {
+interface orderData {
   id: number;
   email: string;
   amount: number;
-  name: Date;
+  date: Date;
 }
 
-const orders: orderData[] = [];
-
-export default orders;
+export default orderData;

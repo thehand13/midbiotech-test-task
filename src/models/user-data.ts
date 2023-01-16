@@ -1,9 +1,7 @@
-export interface userData {
-  email: string;
-  password: string;
-  name: string;
+interface userData {
+  email: string | null;
+  password: string | null;
+  name: string | null;
 }
 
-const users: userData[] = [];
-
-export default users;
+export default userData;

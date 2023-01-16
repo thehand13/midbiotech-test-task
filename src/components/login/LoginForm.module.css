@@ -1,7 +1,8 @@
 .login-form {
+  position: relative;
+  top: 30px;
   background: #ffffff;
   margin: auto;
-  margin-top: 30px;
   max-width: 443px;
   min-height: 316px;
   display: flex;
@@ -40,6 +41,7 @@
   font-weight: 700;
   font-size: 32px;
   line-height: 39px;
+  text-transform: uppercase;
   padding: 12px;
   background-color: #86cd89;
   border: 1px solid #ffffff;
