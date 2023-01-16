@@ -39,7 +39,7 @@ const LoginForm: React.FC<{ loginUser: (loggedUserInfo: userData) => void }> = (
     (async () => {
       try {
         const fetchUsers = await fetch(
-          'https://midbiotech-test-task-ca390-default-rtdb.europe-west1.firebasedatabase.app//users.json'
+          'https://midbiotech-test-task-ca390-default-rtdb.europe-west1.firebasedatabase.app/users.json'
         );
         if (fetchUsers.ok) {
           const fetchedUsers = await fetchUsers.json();

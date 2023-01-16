@@ -24,7 +24,7 @@ const OrdersTab: React.FC = () => {
   useEffect(() => {
     (async () => {
       const fetchOrders = await fetch(
-        'https://midbiotech-test-task-ca390-default-rtdb.europe-west1.firebasedatabase.app//orders.json'
+        'https://midbiotech-test-task-ca390-default-rtdb.europe-west1.firebasedatabase.app/orders.json'
       );
       if (fetchOrders.ok) {
         const responseData = await fetchOrders.json();
