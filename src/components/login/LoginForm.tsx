@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import userData from '../../models/user-data';
 
 import classes from './LoginForm.module.css';
@@ -23,7 +23,7 @@ const LoginForm: React.FC<{ loginUser: (loggedUserInfo: userData) => void }> = (
     event.preventDefault();
     (async () => {
       const fetchUsers = await fetch(
-        'https://morinformsystem-test-task-default-rtdb.europe-west1.firebasedatabase.app/users.json'
+        'https://midbiotech-test-task-ca390-default-rtdb.europe-west1.firebasedatabase.app//users.json'
       );
       if (fetchUsers.ok) {
         const fetchedUsers = await fetchUsers.json();
