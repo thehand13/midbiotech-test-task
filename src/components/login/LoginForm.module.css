@@ -67,6 +67,16 @@
   cursor: pointer;
 }
 
+.warning {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  background-color: inherit;
+  color: red;
+  border: 0px;
+}
+
 .forget:hover {
   text-decoration: underline;
 }
