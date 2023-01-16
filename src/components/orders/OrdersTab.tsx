@@ -57,10 +57,8 @@ const OrdersTab: React.FC = () => {
       }
       setViewedList(newViewedListArray);
       if (orderList.length === numberOfViewedItems) {
-        // setShowMoreButton(false);
+        setShowMoreButton(false);
       }
-    } else if (orderList.length < numberOfViewedItems) {
-      // setShowMoreButton(false);
     }
   }, [viewCouner, orderListWasChanged]);
 
@@ -110,17 +108,19 @@ const OrdersTab: React.FC = () => {
       {!orderListIsEmpty && (
         <ul className={classes['orders-list']}>
           <li className={classes['header-item']}>
-            <div>Номер заказа</div>
-            <div>Email</div>
-            <div>Сумма</div>
-            <div>Дата</div>
+            <div className={classes['list-item-id']}>Номер заказа</div>
+            <div className={classes['list-item-email']}>Email</div>
+            <div className={classes['list-item-amount']}>Сумма</div>
+            <div className={classes['list-item-date']}>Дата</div>
           </li>
           {viewedList.map((listItem) => (
             <li className={classes['list-item']} key={listItem.id}>
-              <div>{listItem.id}</div>
-              <div>{listItem.email}</div>
-              <div>{listItem.amount}</div>
-              <div>
+              <div className={classes['list-item-id']}>{listItem.id}</div>
+              <div className={classes['list-item-email']}>{listItem.email}</div>
+              <div className={classes['list-item-amount']}>
+                {listItem.amount}
+              </div>
+              <div className={classes['list-item-date']}>
                 {listItem.date.getDate()}.{listItem.date.getMonth() + 1}.
                 {listItem.date.getFullYear()}
               </div>
@@ -129,9 +129,14 @@ const OrdersTab: React.FC = () => {
         </ul>
       )}
       {!orderListIsEmpty && showMoreButton && (
-        <button onClick={onMoreClickHandler} className={classes['more-button']}>
-          Показать ещё...
-        </button>
+        <div className={classes['more-button-container']}>
+          <button
+            onClick={onMoreClickHandler}
+            className={classes['more-button']}
+          >
+            Показать ещё...
+          </button>
+        </div>
       )}
     </section>
   );

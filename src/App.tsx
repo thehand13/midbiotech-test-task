@@ -15,11 +15,22 @@ const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(nullUserInfo);
 
+  useEffect(() => {
+    const savedLoginInfo = localStorage.getItem('userInfo');
+    if (savedLoginInfo) {
+      setUserInfo(JSON.parse(savedLoginInfo));
+      setIsLoggedIn(true);
+    }
+    console.log();
+  }, []);
+
   const loginUser = (loggedUserInfo: userData) => {
+    localStorage.setItem('userInfo', JSON.stringify(loggedUserInfo));
     setUserInfo(loggedUserInfo);
     setIsLoggedIn(true);
   };
   const logoutUser = () => {
+    localStorage.removeItem('userInfo');
     setUserInfo(nullUserInfo);
     setIsLoggedIn(false);
   };
