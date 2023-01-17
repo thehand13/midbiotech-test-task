@@ -5,7 +5,7 @@ import LoginForm from './components/login/LoginForm';
 import OrdersPage from './components/orders/OrdersPage';
 import userData from './models/user-data';
 
-const nullUserInfo: userData = {
+const noUserInfo: userData = {
   email: null,
   password: null,
   name: null,
@@ -13,15 +13,18 @@ const nullUserInfo: userData = {
 
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userInfo, setUserInfo] = useState(nullUserInfo);
+  const [userInfo, setUserInfo] = useState(noUserInfo);
 
   useEffect(() => {
     const savedLoginInfo = localStorage.getItem('userInfo');
     if (savedLoginInfo) {
-      setUserInfo(JSON.parse(savedLoginInfo));
-      setIsLoggedIn(true);
+      try {
+        setUserInfo(JSON.parse(savedLoginInfo));
+        setIsLoggedIn(true);
+      } catch (error) {
+        localStorage.removeItem('userInfo');
+      }
     }
-    console.log();
   }, []);
 
   const loginUser = (loggedUserInfo: userData) => {
@@ -31,7 +34,7 @@ const App: React.FC = () => {
   };
   const logoutUser = () => {
     localStorage.removeItem('userInfo');
-    setUserInfo(nullUserInfo);
+    setUserInfo(noUserInfo);
     setIsLoggedIn(false);
   };
 

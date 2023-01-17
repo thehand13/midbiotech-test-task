@@ -53,7 +53,7 @@ const LoginForm: React.FC<{ loginUser: (loggedUserInfo: userData) => void }> = (
               successfulLogin = true;
             }
           });
-          if (successfulLogin === false) {
+          if (!successfulLogin) {
             setLowerStringState(`Неверный логин и/или пароль`);
             setLoginWarning(true);
           }

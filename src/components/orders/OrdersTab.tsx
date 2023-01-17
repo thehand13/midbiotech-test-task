@@ -29,7 +29,7 @@ const OrdersTab: React.FC = () => {
       if (fetchOrders.ok) {
         const responseData = await fetchOrders.json();
         const newOrderList: orderData[] = responseData.map(
-          (responseItem: any) => {
+          (responseItem: orderData) => {
             return {
               id: responseItem.id,
               email: responseItem.email,
@@ -67,7 +67,7 @@ const OrdersTab: React.FC = () => {
   };
 
   const onChangeSelectHandler = (event: any) => {
-    let newOrderList = orderList.map((responseItem: any) => {
+    let newOrderList = orderList.map((responseItem: orderData) => {
       return {
         id: responseItem.id,
         email: responseItem.email,
