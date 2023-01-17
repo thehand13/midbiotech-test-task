@@ -53,7 +53,12 @@ const OrdersTab: React.FC = () => {
 
     if (orderList.length >= numberOfViewedItems) {
       for (let i = 0; i < numberOfViewedItems; i++) {
-        newViewedListArray.push(orderList[i]);
+        newViewedListArray.push({
+          id: orderList[i].id,
+          email: orderList[i].email,
+          amount: orderList[i].amount,
+          date: orderList[i].date,
+        });
       }
       setViewedList(newViewedListArray);
       if (orderList.length === numberOfViewedItems) {
@@ -66,7 +71,9 @@ const OrdersTab: React.FC = () => {
     setViewCounter((prev) => prev + 1);
   };
 
-  const onChangeSelectHandler = (event: any) => {
+  const onChangeSelectHandler = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     let newOrderList = orderList.map((responseItem: orderData) => {
       return {
         id: responseItem.id,
@@ -75,37 +82,43 @@ const OrdersTab: React.FC = () => {
         date: responseItem.date,
       };
     });
-    if (event.target.value === 'number') {
-      newOrderList = newOrderList.sort(
-        (first: orderData, second: orderData) => {
-          return first.id - second.id;
-        }
-      );
-    } else if (event.target.value === 'email') {
-      newOrderList = newOrderList.sort(
-        (first: orderData, second: orderData) => {
-          if (first.email > second.email) {
-            return 1;
-          } else if (first.email < second.email) {
-            return -1;
-          } else {
-            return 0;
+    switch (event.target.value) {
+      case 'number':
+        newOrderList = newOrderList.sort(
+          (first: orderData, second: orderData) => {
+            return first.id - second.id;
           }
-        }
-      );
-    } else if (event.target.value === 'totalPrice') {
-      newOrderList = newOrderList.sort(
-        (first: orderData, second: orderData) => {
-          return first.amount - second.amount;
-        }
-      );
-    } else if (event.target.value === 'date') {
-      newOrderList = newOrderList.sort(
-        (first: orderData, second: orderData) => {
-          return first.date.getTime() - second.date.getTime();
-        }
-      );
+        );
+        break;
+      case 'email':
+        newOrderList = newOrderList.sort(
+          (first: orderData, second: orderData) => {
+            if (first.email > second.email) {
+              return 1;
+            } else if (first.email < second.email) {
+              return -1;
+            } else {
+              return 0;
+            }
+          }
+        );
+        break;
+      case 'totalPrice':
+        newOrderList = newOrderList.sort(
+          (first: orderData, second: orderData) => {
+            return first.amount - second.amount;
+          }
+        );
+        break;
+      case 'date':
+        newOrderList = newOrderList.sort(
+          (first: orderData, second: orderData) => {
+            return first.date.getTime() - second.date.getTime();
+          }
+        );
+        break;
     }
+
     setOrderList(newOrderList);
     setOrderListWasChanged((prev) => prev + 1);
   };
