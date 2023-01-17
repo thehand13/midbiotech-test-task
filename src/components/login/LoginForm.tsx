@@ -34,35 +34,35 @@ const LoginForm: React.FC<{ loginUser: (loggedUserInfo: userData) => void }> = (
     setPasswordState(event.target.value);
   };
 
-  const onSubmitLoginHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitLoginHandler = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
-    (async () => {
-      try {
-        const fetchUsers = await fetch(
-          'https://midbiotech-test-task-ca390-default-rtdb.europe-west1.firebasedatabase.app/users.json'
-        );
-        if (fetchUsers.ok) {
-          const fetchedUsers = await fetchUsers.json();
-          let successfulLogin = false;
-          fetchedUsers.forEach((fetchedUser: userData) => {
-            if (
-              fetchedUser.email === emailState &&
-              fetchedUser.password === passwordState
-            ) {
-              props.loginUser(fetchedUser);
-              successfulLogin = true;
-            }
-          });
-          if (!successfulLogin) {
-            setLowerStringState(`Неверный логин и/или пароль`);
-            setLoginWarning(true);
+    try {
+      const fetchUsers = await fetch(
+        'https://midbiotech-test-task-ca390-default-rtdb.europe-west1.firebasedatabase.app/users.json'
+      );
+      if (fetchUsers.ok) {
+        const fetchedUsers = await fetchUsers.json();
+        let successfulLogin = false;
+        fetchedUsers.forEach((fetchedUser: userData) => {
+          if (
+            fetchedUser.email === emailState &&
+            fetchedUser.password === passwordState
+          ) {
+            props.loginUser(fetchedUser);
+            successfulLogin = true;
           }
+        });
+        if (!successfulLogin) {
+          setLowerStringState(`Неверный логин и/или пароль`);
+          setLoginWarning(true);
         }
-      } catch (error) {
-        setLowerStringState('Плохое подключение к интернету');
-        setLoginWarning(true);
       }
-    })();
+    } catch (error) {
+      setLowerStringState('Плохое подключение к интернету');
+      setLoginWarning(true);
+    }
   };
   return (
     <>
